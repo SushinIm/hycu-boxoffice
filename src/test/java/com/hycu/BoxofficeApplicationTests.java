@@ -1,4 +1,4 @@
-package com.boxoffice;
+package com.hycu;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

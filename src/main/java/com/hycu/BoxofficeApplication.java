@@ -1,4 +1,4 @@
-package com.boxoffice;
+package com.hycu;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
