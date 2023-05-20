@@ -1,5 +1,30 @@
 server:
   port: 8080
 
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/project?serverTimezone=UTC&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DB_ID}
+    password: ${DB_PW}
+    hikari:
+      idle-timeout: 30000
+      maximum-pool-size: 10
+      minimum-idle: 3
+      pool-name: SpringBootJPAHikariCP
+      connection-test-query: SELECT 1
+  jooq:
+    sql-dialect: mysql
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database: mysql
+    show-sql: true
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
 api:
   key: ${OPEN_API_KEY}
+  kobis:
+    url: https://www.kobis.or.kr/kobisopenapi/webservice/rest
