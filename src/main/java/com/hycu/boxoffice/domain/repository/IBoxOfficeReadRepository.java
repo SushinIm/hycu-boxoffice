@@ -1,6 +1,9 @@
 package com.hycu.boxoffice.domain.repository;
 
+import com.hycu.boxoffice.domain.entity.BoxOfficeApiEntity;
+import java.util.List;
+
 public interface IBoxOfficeReadRepository {
 
-    void getDailyBoxOffice(String apiKey);
+    List<BoxOfficeApiEntity> getDailyBoxOffice(String apiKey);
 }

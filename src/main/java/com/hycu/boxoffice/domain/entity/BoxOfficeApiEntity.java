@@ -1,30 +1,48 @@
 package com.hycu.boxoffice.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
 public class BoxOfficeApiEntity {
-    /*
-        "boxOfficeResult": {
-            "boxofficeType": "일별 박스오피스",
-                "showRange": "20120101~20120101",
-                "dailyBoxOfficeList": [
-                {
-                    "rnum": "1",
-                        "rank": "1",
-                        "rankInten": "0",
-                         "rankOldAndNew": "OLD",
-                        "movieCd": "20112207",
-                        "movieNm": "미션임파서블:고스트프로토콜",
-                        "openDt": "2011-12-15",
-                        "salesAmt": "2776060500",
-                        "salesShare": "36.3",
-                        "salesInten": "-415699000",
-                        "salesChange": "-13",
-                        "salesAcc": "40541108500",
-                        "audiCnt": "353274",
-                        "audiInten": "-60106",
-                        "audiChange": "-14.5",
-                        "audiAcc": "5328435",
-                        "scrnCnt": "697",
-                        "showCnt": "3223"
-                }
-    */
+    @JsonProperty("rnum")
+    private Integer rowNum;
+    @JsonProperty("rank")
+    private Integer rank;
+    @JsonProperty("rankInten")
+    private Integer rankIntensity;
+    @JsonProperty("rankOldAndNew")
+    private String rankOldAndNew;
+    @JsonProperty("movieCd")
+    private Integer movieCode;
+    @JsonProperty("movieNm")
+    private String movieName;
+    @JsonProperty("openDt")
+    private LocalDate openedAt;
+    @JsonProperty("salesAmt")
+    private BigDecimal salesAmount;
+    @JsonProperty("salesShare")
+    private BigDecimal salesShare;
+    @JsonProperty("salesInten")
+    private BigDecimal salesIntensity;
+    @JsonProperty("salesChange")
+    private BigDecimal salesChange;
+    @JsonProperty("salesAcc")
+    private BigDecimal salesAccumulate;
+    @JsonProperty("audiCnt")
+    private Integer audienceCount;
+    @JsonProperty("audiInten")
+    private BigDecimal audienceIntensity;
+    @JsonProperty("audiChange")
+    private BigDecimal audienceChange;
+    @JsonProperty("audiAcc")
+    private BigDecimal audienceAccumulate;
+    @JsonProperty("scrnCnt")
+    private Integer screenCount;
+    @JsonProperty("showCnt")
+    private Integer showCount;
 }
