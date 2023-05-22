@@ -2,7 +2,9 @@ package com.hycu.boxoffice.domain.repository.impl;
 
 import com.hycu.boxoffice.domain.entity.BoxOfficeApiEntity;
 import com.hycu.boxoffice.domain.entity.BoxOfficeApiResponseEntity;
+import com.hycu.boxoffice.domain.entity.BoxOfficeEntity;
 import com.hycu.boxoffice.domain.repository.IBoxOfficeReadRepository;
+import com.hycu.boxoffice.domain.repository.IBoxOfficeWriteRepository;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -13,9 +15,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Repository
 @RequiredArgsConstructor
-public class BoxOfficeRepository implements IBoxOfficeReadRepository {
+public class BoxOfficeRepository implements IBoxOfficeReadRepository, IBoxOfficeWriteRepository {
 
     private final WebClient webClient;
+    private final IBoxOfficeWriterRepository boxOfficeWriterRepository;
 
     @Override
     public List<BoxOfficeApiEntity> getDailyBoxOffice(String apiKey) {
@@ -33,6 +36,12 @@ public class BoxOfficeRepository implements IBoxOfficeReadRepository {
         Assert.notNull(response.getBoxOfficeResult().getBoxOfficeList(), "응답값 부재");
 
         return response.getBoxOfficeResult().getBoxOfficeList();
+    }
+
+    @Override
+    public List<BoxOfficeEntity> saveBoxOfficeList(List<BoxOfficeEntity> boxOfficeList) {
+        Assert.notNull(boxOfficeList, "박스 오피스 정보 부재");
+        return boxOfficeWriterRepository.saveAll(boxOfficeList);
     }
 
     private String getDailyBoxOfficeApiUrl(String apiKey, String date) {

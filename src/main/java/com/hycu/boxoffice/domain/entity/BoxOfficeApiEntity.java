@@ -12,9 +12,9 @@ public class BoxOfficeApiEntity {
     @JsonProperty("rnum")
     private Integer rowNum;
     @JsonProperty("rank")
-    private Integer rank;
+    private Integer ranking;
     @JsonProperty("rankInten")
-    private Integer rankIntensity;
+    private Long rankIntensity;
     @JsonProperty("rankOldAndNew")
     private String rankOldAndNew;
     @JsonProperty("movieCd")
@@ -24,25 +24,25 @@ public class BoxOfficeApiEntity {
     @JsonProperty("openDt")
     private LocalDate openedAt;
     @JsonProperty("salesAmt")
-    private BigDecimal salesAmount;
+    private Long salesAmount;
     @JsonProperty("salesShare")
     private BigDecimal salesShare;
     @JsonProperty("salesInten")
-    private BigDecimal salesIntensity;
+    private Long salesIntensity;
     @JsonProperty("salesChange")
     private BigDecimal salesChange;
     @JsonProperty("salesAcc")
-    private BigDecimal salesAccumulate;
+    private Long salesAccumulate;
     @JsonProperty("audiCnt")
-    private Integer audienceCount;
+    private Long audienceCount;
     @JsonProperty("audiInten")
-    private BigDecimal audienceIntensity;
+    private Long audienceIntensity;
     @JsonProperty("audiChange")
     private BigDecimal audienceChange;
     @JsonProperty("audiAcc")
-    private BigDecimal audienceAccumulate;
+    private Long audienceAccumulate;
     @JsonProperty("scrnCnt")
-    private Integer screenCount;
+    private Long screenCount;
     @JsonProperty("showCnt")
-    private Integer showCount;
+    private Long showCount;
 }

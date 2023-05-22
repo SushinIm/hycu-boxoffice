@@ -1,6 +1,7 @@
 package com.hycu.boxoffice.domain.mapper;
 
 import com.hycu.boxoffice.domain.entity.BoxOfficeApiEntity;
+import com.hycu.boxoffice.domain.entity.BoxOfficeEntity;
 import com.hycu.boxoffice.usecase.model.BoxOfficeModel;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -21,6 +22,10 @@ public interface IBoxOfficeMapper {
     @Mapping(target = "newRanked", source = "apiEntity.rankOldAndNew", qualifiedByName = "isNewRanked")
     @Mapping(target = "savedAt", expression = "java(java.time.LocalDate.now().minusDays(1))")
     BoxOfficeModel apiEntityToModel(BoxOfficeApiEntity apiEntity);
+
+    BoxOfficeModel toModel(BoxOfficeEntity entity);
+
+    BoxOfficeEntity toEntity(BoxOfficeModel model);
 
     @Named(value = "isNewRanked")
     static Boolean isNewRanked(String rankOldAndNew) {
