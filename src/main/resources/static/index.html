@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="./js/util.js"></script>
+  <title>박스오피스</title>
+</head>
+<body>
+  <div id="head">
+    <label for="startDate">From</label> <input type="date" id="startDate"/>
+    ~
+    <label for="endDate">To</label> <input type="date" id="endDate"/>
+    <input type="button" value="조회" id="search"/>
+  </div>
+  <hr />
+</body>
+<script>
+  window.onload = () => {
+    let today = new Date();
+    let thisYear = today.getFullYear();
+    let thisMonth = today.getMonth() + 1;
+    let thisDate = today.getDate();
+    document.querySelector("#startDate").value = `${thisYear}-${digit2(thisMonth-1)}-${digit2(thisDate)}`;
+    document.querySelector("#endDate").value = `${thisYear}-${digit2(thisMonth)}-${digit2(thisDate)}`;
+    document.querySelector("#search").addEventListener("click", () => {
+      //TODO 기간값을 넘겨 박스오피스 목록을 가져오는 API 호출, 결과값을 만들어주는 기능 D3로 제작
+    });
+  }
+
+</script>
+</html>
