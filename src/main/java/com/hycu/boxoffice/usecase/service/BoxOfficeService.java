@@ -1,5 +1,6 @@
 package com.hycu.boxoffice.usecase.service;
 
+import com.hycu.boxoffice.presenter.payload.request.BoxOfficeReq;
 import com.hycu.boxoffice.usecase.model.BoxOfficeModel;
 import com.hycu.boxoffice.usecase.port.input.IBoxOfficeInUseCase;
 import com.hycu.boxoffice.usecase.port.output.IBoxOfficeReadOutUseCase;
@@ -25,5 +26,11 @@ public class BoxOfficeService implements IBoxOfficeInUseCase {
         Assert.hasText(apiKey, "OpenApi 호출을 위한 인증키 누락");
         List<BoxOfficeModel> boxOfficeList =  boxOfficeReadOutUseCase.getDailyBoxOffice(apiKey);
         boxOfficeWriteOutUseCase.saveBoxOfficeList(boxOfficeList);
+    }
+
+    @Override
+    public List<BoxOfficeModel> getPeriodBoxOffice(BoxOfficeReq request) {
+        //TODO request 값을 통해 박스 오피스 데이터를 조회하는 기능
+        return null;
     }
 }

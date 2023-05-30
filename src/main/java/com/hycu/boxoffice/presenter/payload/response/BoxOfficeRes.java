@@ -1,4 +1,4 @@
-package com.hycu.boxoffice.usecase.model;
+package com.hycu.boxoffice.presenter.payload.response;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class BoxOfficeModel {
+public class BoxOfficeRes {
     private Long id;
     private Integer movieCode;
     private String movieName;
@@ -28,7 +28,7 @@ public class BoxOfficeModel {
     private LocalDate openedAt;
     private LocalDate savedAt;
 
-    public BoxOfficeModel(Long id, Integer movieCode, String movieName, Integer ranking, Integer rankIntensity,
+    public BoxOfficeRes(Long id, Integer movieCode, String movieName, Integer ranking, Integer rankIntensity,
             Boolean newRanked, Long salesAmount, BigDecimal salesShare, Long salesIntensity, BigDecimal salesChange,
             Long salesAccumulate, Long audienceCount, Long audienceIntensity, BigDecimal audienceChange,
             Long audienceAccumulate, Long screenCount, Long showCount, LocalDate openedAt, LocalDate savedAt) {
