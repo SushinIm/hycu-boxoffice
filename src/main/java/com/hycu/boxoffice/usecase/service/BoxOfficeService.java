@@ -30,7 +30,9 @@ public class BoxOfficeService implements IBoxOfficeInUseCase {
 
     @Override
     public List<BoxOfficeModel> getPeriodBoxOffice(BoxOfficeReq request) {
-        //TODO request 값을 통해 박스 오피스 데이터를 조회하는 기능
-        return null;
+        Assert.notNull(request, "검색 데이터 누락");
+        Assert.notNull(request.getStartDate(), "시작 기준일 누락");
+        Assert.notNull(request.getEndDate(), "종료 기준일 누락");
+        return boxOfficeReadOutUseCase.getPeriodBoxOffice(request);
     }
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="/js/util.js"></script>
+  <script src="../js/util.js"></script>
   <title>박스오피스</title>
 </head>
 <body>
@@ -29,15 +29,19 @@
       let startDate = document.querySelector("#startDate").value;
       let endDate = document.querySelector("#endDate").value;
 
-      requestUri += "?startDate=" + !startDate ? "" : startDate;
-      requestUri += "&endDate=" + !endDate ? "" : endDate;
+      requestUri += "?startDate=" + (startDate ? startDate : "");
+      requestUri += "&endDate=" + (endDate ? endDate : "");
 
-      fetch(requestUri)
-      .then(res => res.json())
-      .then(data => {
-        //TODO 결과값을 만들어주는 기능 D3로 제작
-        console.log(data);
-      })
+      if (startDate && endDate) {
+        fetch(requestUri)
+        .then(res => res.json())
+        .then(data => {
+          //TODO 결과값을 만들어주는 기능 D3로 제작
+          console.log(data);
+        });
+      } else {
+        alert("검색 기준 날짜 범위를 설정해 주십시오.");
+      }
     });
   }
 </script>

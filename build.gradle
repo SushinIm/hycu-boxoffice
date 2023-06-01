@@ -37,6 +37,7 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
+	jooqGenerator('com.mysql:mysql-connector-j')
 
 	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
@@ -51,4 +52,46 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+jooq {
+	version = dependencyManagement.importedProperties['jooq.version']
+	configurations {
+		main {
+			generateSchemaSourceOnCompilation = true
+			generationTool {
+				logging = org.jooq.meta.jaxb.Logging.WARN
+				onError = 'LOG'
+
+				jdbc {
+					driver = 'com.mysql.cj.jdbc.Driver'
+					url = 'jdbc:mysql://localhost:3306/project'
+					user = System.getenv("DB_ID")
+					password = System.getenv("DB_PW")
+				}
+				generator {
+					name = 'org.jooq.codegen.DefaultGenerator'
+					strategy {
+						name = 'org.jooq.codegen.DefaultGeneratorStrategy'
+					}
+					database {
+						name = 'org.jooq.meta.mysql.MySQLDatabase'
+						unsignedTypes = false
+						inputSchema = 'project'
+					}
+					generate {
+						deprecated = false
+						records = true
+						immutablePojos = true
+						fluentSetters = true
+						javaTimeTypes = true
+					}
+					target {
+						packageName = 'jooq.dsl'
+						directory = 'src/generated/jooq/'
+					}
+				}
+			}
+		}
+	}
 }
