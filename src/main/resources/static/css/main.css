@@ -1,0 +1,20 @@
+#header {}
+
+#wrap {
+  height: auto;
+}
+#wrap #nav {
+  width: 500px;
+  border-right: 1px solid black;
+}
+#wrap #nav p {
+  cursor: pointer;
+  margin: 0;
+  padding: 10px 0 10px;
+}
+#wrap #chart {
+  width: auto;
+}
+#footer {
+  text-align: right;
+}
