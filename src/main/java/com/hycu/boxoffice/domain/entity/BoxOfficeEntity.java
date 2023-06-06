@@ -51,7 +51,7 @@ public class BoxOfficeEntity {
     @Column(name = "audience_change")
     private BigDecimal audienceChange;
     @Column(name = "audience_accumulate")
-    private BigDecimal audienceAccumulate;
+    private Long audienceAccumulate;
     @Column(name = "screen_count")
     private Long screenCount;
     @Column(name = "show_count")

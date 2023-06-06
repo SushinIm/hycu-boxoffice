@@ -16,9 +16,7 @@ public class BoxOfficeWriter implements IBoxOfficeWriteOutUseCase {
     private final IBoxOfficeMapper boxOfficeMapper;
 
     @Override
-    public List<BoxOfficeModel> saveBoxOfficeList(List<BoxOfficeModel> boxOfficeList) {
-        return boxOfficeWriteRepository.saveBoxOfficeList(boxOfficeList
-                        .stream().map(boxOfficeMapper::toEntity).toList())
-                .stream().map(boxOfficeMapper::toModel).toList();
+    public void saveBoxOfficeList(List<BoxOfficeModel> boxOfficeList) {
+        boxOfficeWriteRepository.saveBoxOfficeList(boxOfficeList.stream().map(boxOfficeMapper::toEntity).toList());
     }
 }

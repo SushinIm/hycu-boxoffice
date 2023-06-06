@@ -7,15 +7,53 @@
   <title>박스오피스</title>
 </head>
 <body>
-<div id="head">
+<div id="header">
   <label for="startDate">From</label> <input type="date" id="startDate"/>
   ~
   <label for="endDate">To</label> <input type="date" id="endDate"/>
   <input type="button" value="조회" id="search"/>
 </div>
 <hr />
+<div id="wrap">
+  <div id="nav"></div>
+  <div id="chart"></div>
+</div>
+<div id="footer">
+</div>
 </body>
 <script>
+  const setMovieChart = (boxOffice) => {
+    const chartArea = d3.select("body > div#wrap > div#chart");
+    chartArea.select("*").remove();
+    const movieData = boxOffice.filter(movie => boxOffice.movieName === movie.movieName);
+      //TODO 순위
+      //TODO 매출
+      //TODO 관객
+      //TODO 상영
+      //TODO 날짜별로 꺾은선 그래프?
+  }
+
+  const setMovieNameList = (data) => {
+    const navArea = d3.select("body > div#wrap > div#nav");
+    navArea.select("*").remove();
+    data.forEach(boxOffice => {
+      navArea.append("p").append("a").text(boxOffice.movieName).addEventListener("click", () =>
+          setMovieChart(boxOffice));
+    })
+  }
+
+  const setBoxOfficeChart = (data) => {
+    const chartArea = d3.select("body > div#wrap > div#chart");
+    chartArea.select("*").remove();
+    data.forEach(boxOffice => {
+      let chartBox = chartArea.append("svg")
+      .attr("width", 1000)
+      .attr("height", 500);
+
+      chartBox.append('line')
+    })
+  }
+
   window.onload = () => {
     const requestUrl = "http://localhost:8080/api/box-office";
     let today = new Date();
@@ -35,9 +73,10 @@
       if (startDate && endDate) {
         fetch(requestUri)
         .then(res => res.json())
-        .then(data => {
-          //TODO 결과값을 만들어주는 기능 D3로 제작
-          console.log(data);
+        .then(responseData => {
+          console.log(responseData);
+          setMovieNameList(responseData);
+          setBoxOfficeChart(responseData);
         });
       } else {
         alert("검색 기준 날짜 범위를 설정해 주십시오.");

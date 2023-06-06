@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface IBoxOfficeWriteRepository {
 
-    List<BoxOfficeEntity> saveBoxOfficeList(List<BoxOfficeEntity> boxOfficeList);
+    void saveBoxOfficeList(List<BoxOfficeEntity> boxOfficeList);
 }

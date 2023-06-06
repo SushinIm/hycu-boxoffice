@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface IBoxOfficeWriteOutUseCase {
 
-    List<BoxOfficeModel> saveBoxOfficeList(List<BoxOfficeModel> boxOfficeList);
+    void saveBoxOfficeList(List<BoxOfficeModel> boxOfficeList);
 }

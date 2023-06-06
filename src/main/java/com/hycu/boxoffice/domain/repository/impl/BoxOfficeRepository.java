@@ -12,6 +12,8 @@ import java.util.List;
 import jooq.dsl.tables.BoxOffice;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -21,8 +23,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class BoxOfficeRepository implements IBoxOfficeReadRepository, IBoxOfficeWriteRepository {
 
     private final WebClient webClient;
-    private final IBoxOfficeWriterRepository boxOfficeWriterRepository;
     private final DSLContext dslContext;
+    private final NamedParameterJdbcTemplate jdbcTemplate;
     private final BoxOffice boxOffice = BoxOffice.BOX_OFFICE;
 
     @Override
@@ -55,9 +57,24 @@ public class BoxOfficeRepository implements IBoxOfficeReadRepository, IBoxOffice
     }
 
     @Override
-    public List<BoxOfficeEntity> saveBoxOfficeList(List<BoxOfficeEntity> boxOfficeList) {
+    public void saveBoxOfficeList(List<BoxOfficeEntity> boxOfficeList) {
         Assert.notNull(boxOfficeList, "박스 오피스 정보 부재");
-        return boxOfficeWriterRepository.saveAll(boxOfficeList);
+        String insertSql = "INSERT INTO box_office "
+                + "(movie_code, movie_name, ranking, rank_intensity, new_ranked, sales_amount, sales_share, "
+                + "sales_intensity, sales_change, sales_accumulate, audience_count, audience_intensity, "
+                + "audience_change, audience_accumulate, screen_count, show_count, opened_at, saved_at) "
+                + "VALUES (:movieCode, :movieName, :ranking, :rankIntensity, :newRanked, :salesAmount, :salesShare, "
+                + ":salesIntensity, :salesChange, :salesAccumulate, :audienceCount, :audienceIntensity, "
+                + ":audienceChange, :audienceAccumulate, :screenCount, :showCount, :openedAt, :savedAt) "
+                + "ON DUPLICATE KEY UPDATE "
+                + "movie_code = :movieCode, movie_name = :movieName, ranking = :ranking, "
+                + "rank_intensity = :rankIntensity, new_ranked = :newRanked, sales_amount = :salesAmount, "
+                + "sales_share = :salesShare, sales_intensity = :salesIntensity, sales_change = :salesChange, "
+                + "sales_accumulate = :salesAccumulate, audience_count = :audienceCount, "
+                + "audience_intensity = :audienceIntensity, audience_change = :audienceChange, "
+                + "audience_accumulate = :audienceAccumulate, screen_count = :screenCount, show_count = :showCount, "
+                + "opened_at = :openedAt, saved_at = :savedAt";
+        jdbcTemplate.batchUpdate(insertSql, SqlParameterSourceUtils.createBatch(boxOfficeList));
     }
 
     private String getDailyBoxOfficeApiUrl(String apiKey, String date) {
