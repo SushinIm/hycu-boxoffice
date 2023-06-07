@@ -33,7 +33,7 @@
     document.querySelector("#startDate").value = `${thisYear}-${digit2(thisMonth-1)}-${digit2(thisDate)}`;
     document.querySelector("#endDate").value = `${thisYear}-${digit2(thisMonth)}-${digit2(thisDate)}`;
     document.querySelector("#search").addEventListener("click", () => {
-      let requestUri = requestUrl;
+      let requestUri = requestUrl + "/period";
       let startDate = document.querySelector("#startDate").value;
       let endDate = document.querySelector("#endDate").value;
 

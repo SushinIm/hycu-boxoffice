@@ -4,6 +4,7 @@ import com.hycu.boxoffice.domain.mapper.IBoxOfficeMapper;
 import com.hycu.boxoffice.domain.repository.IBoxOfficeReadRepository;
 import com.hycu.boxoffice.presenter.payload.request.BoxOfficeReq;
 import com.hycu.boxoffice.usecase.model.BoxOfficeModel;
+import com.hycu.boxoffice.usecase.model.PeriodBoxOfficeModel;
 import com.hycu.boxoffice.usecase.port.output.IBoxOfficeReadOutUseCase;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -25,10 +26,11 @@ public class BoxOfficeReader implements IBoxOfficeReadOutUseCase {
     }
 
     @Override
-    public List<BoxOfficeModel> getPeriodBoxOffice(BoxOfficeReq request) {
+    public List<PeriodBoxOfficeModel> getPeriodBoxOffice(BoxOfficeReq request) {
         Assert.notNull(request, "검색 데이터 누락");
         Assert.notNull(request.getStartDate(), "시작 기준일 누락");
         Assert.notNull(request.getEndDate(), "종료 기준일 누락");
-        return boxOfficeReadRepository.getPeriodBoxOffice(request).stream().map(boxOfficeMapper::toModel).toList();
+        return boxOfficeReadRepository.getPeriodBoxOffice(request).stream()
+                .map(boxOfficeMapper::toPeriodBoxOfficeModel).toList();
     }
 }

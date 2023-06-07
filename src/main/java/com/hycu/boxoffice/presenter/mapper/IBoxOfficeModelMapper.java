@@ -1,7 +1,9 @@
 package com.hycu.boxoffice.presenter.mapper;
 
 import com.hycu.boxoffice.presenter.payload.response.BoxOfficeRes;
+import com.hycu.boxoffice.presenter.payload.response.PeriodBoxOfficeRes;
 import com.hycu.boxoffice.usecase.model.BoxOfficeModel;
+import com.hycu.boxoffice.usecase.model.PeriodBoxOfficeModel;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants.ComponentModel;
@@ -16,4 +18,6 @@ import org.mapstruct.ReportingPolicy;
         injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface IBoxOfficeModelMapper {
     BoxOfficeRes toRes(BoxOfficeModel model);
+
+    PeriodBoxOfficeRes toPeriodBoxOfficeRes(PeriodBoxOfficeModel model);
 }

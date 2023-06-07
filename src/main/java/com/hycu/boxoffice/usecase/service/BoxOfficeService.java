@@ -2,10 +2,12 @@ package com.hycu.boxoffice.usecase.service;
 
 import com.hycu.boxoffice.presenter.payload.request.BoxOfficeReq;
 import com.hycu.boxoffice.usecase.model.BoxOfficeModel;
+import com.hycu.boxoffice.usecase.model.PeriodBoxOfficeModel;
 import com.hycu.boxoffice.usecase.port.input.IBoxOfficeInUseCase;
 import com.hycu.boxoffice.usecase.port.output.IBoxOfficeReadOutUseCase;
 import com.hycu.boxoffice.usecase.port.output.IBoxOfficeWriteOutUseCase;
 import java.util.List;
+import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,11 +31,15 @@ public class BoxOfficeService implements IBoxOfficeInUseCase {
     }
 
     @Override
-    public List<BoxOfficeModel> getPeriodBoxOffice(BoxOfficeReq request) {
+    public List<PeriodBoxOfficeModel> getPeriodBoxOffice(BoxOfficeReq request) {
         Assert.notNull(request, "검색 데이터 누락");
         Assert.notNull(request.getStartDate(), "시작 기준일 누락");
         Assert.notNull(request.getEndDate(), "종료 기준일 누락");
 
-        return boxOfficeReadOutUseCase.getPeriodBoxOffice(request);
+        List<PeriodBoxOfficeModel> periodBoxOfficeList = boxOfficeReadOutUseCase.getPeriodBoxOffice(request);
+
+        return IntStream.range(0, periodBoxOfficeList.size())
+                .mapToObj(index -> periodBoxOfficeList.get(index).toBuilder().ranking(index + 1).build())
+                .toList();
     }
 }

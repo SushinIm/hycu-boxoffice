@@ -1,8 +1,14 @@
 package com.hycu.boxoffice.domain.repository.impl;
 
+import static org.jooq.impl.DSL.avg;
+import static org.jooq.impl.DSL.field;
+import static org.jooq.impl.DSL.max;
+import static org.jooq.impl.DSL.min;
+
 import com.hycu.boxoffice.domain.entity.BoxOfficeApiEntity;
 import com.hycu.boxoffice.domain.entity.BoxOfficeApiResponseEntity;
 import com.hycu.boxoffice.domain.entity.BoxOfficeEntity;
+import com.hycu.boxoffice.domain.entity.PeriodBoxOfficeEntity;
 import com.hycu.boxoffice.domain.repository.IBoxOfficeReadRepository;
 import com.hycu.boxoffice.domain.repository.IBoxOfficeWriteRepository;
 import com.hycu.boxoffice.presenter.payload.request.BoxOfficeReq;
@@ -46,14 +52,29 @@ public class BoxOfficeRepository implements IBoxOfficeReadRepository, IBoxOffice
     }
 
     @Override
-    public List<BoxOfficeEntity> getPeriodBoxOffice(BoxOfficeReq request) {
+    public List<PeriodBoxOfficeEntity> getPeriodBoxOffice(BoxOfficeReq request) {
         Assert.notNull(request, "검색 데이터 누락");
         Assert.notNull(request.getStartDate(), "시작 기준일 누락");
         Assert.notNull(request.getEndDate(), "종료 기준일 누락");
-        return dslContext.select(boxOffice.fields())
+        return dslContext.select(boxOffice.MOVIE_CODE,
+                        boxOffice.MOVIE_NAME,
+                        avg(boxOffice.SALES_AMOUNT).as("sales_amount"),
+                        avg(boxOffice.SALES_SHARE).as("sales_share"),
+                        avg(boxOffice.SALES_INTENSITY).as("sales_intensity"),
+                        avg(boxOffice.SALES_CHANGE).as("sales_change"),
+                        max(boxOffice.SALES_ACCUMULATE).as("sales_accumulate"),
+                        avg(boxOffice.AUDIENCE_COUNT).as("audience_count"),
+                        avg(boxOffice.AUDIENCE_INTENSITY).as("audience_intensity"),
+                        avg(boxOffice.AUDIENCE_CHANGE).as("audience_change"),
+                        max(boxOffice.AUDIENCE_ACCUMULATE).as("audience_accumulate"),
+                        avg(boxOffice.SCREEN_COUNT).as("screen_count"),
+                        avg(boxOffice.SHOW_COUNT).as("show_count"),
+                        min(boxOffice.OPENED_AT).as("opened_at"))
                 .from(boxOffice)
                 .where(boxOffice.SAVED_AT.between(request.getStartDate(), request.getEndDate()))
-                .fetchInto(BoxOfficeEntity.class);
+                .groupBy(boxOffice.MOVIE_CODE, boxOffice.MOVIE_NAME)
+                .orderBy(field("audience_accumulate").desc())
+                .fetchInto(PeriodBoxOfficeEntity.class);
     }
 
     @Override

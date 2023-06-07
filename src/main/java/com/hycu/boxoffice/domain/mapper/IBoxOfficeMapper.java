@@ -2,7 +2,9 @@ package com.hycu.boxoffice.domain.mapper;
 
 import com.hycu.boxoffice.domain.entity.BoxOfficeApiEntity;
 import com.hycu.boxoffice.domain.entity.BoxOfficeEntity;
+import com.hycu.boxoffice.domain.entity.PeriodBoxOfficeEntity;
 import com.hycu.boxoffice.usecase.model.BoxOfficeModel;
+import com.hycu.boxoffice.usecase.model.PeriodBoxOfficeModel;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -26,6 +28,8 @@ public interface IBoxOfficeMapper {
     BoxOfficeModel toModel(BoxOfficeEntity entity);
 
     BoxOfficeEntity toEntity(BoxOfficeModel model);
+
+    PeriodBoxOfficeModel toPeriodBoxOfficeModel(PeriodBoxOfficeEntity entity);
 
     @Named(value = "isNewRanked")
     static Boolean isNewRanked(String rankOldAndNew) {
