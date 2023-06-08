@@ -19,7 +19,6 @@
   <div id="nav"></div>
   <div id="chart"></div>
 </div>
-<hr />
 <div id="footer">
 </div>
 </body>
@@ -44,7 +43,8 @@
         fetch(requestUri)
         .then(res => res.json())
         .then(responseData => {
-          setMovieNameList(responseData.data.list);
+          const movieNameList = responseData.data.list.map(boxOffice => `${boxOffice.ranking}. ${boxOffice.movieName}`);
+          setMovieNameList(movieNameList);
           setBoxOfficeChart(responseData.data.list);
         });
       } else {

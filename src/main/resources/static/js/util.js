@@ -14,12 +14,38 @@ const setMovieChart = (boxOffice) => {
   //TODO 날짜별로 꺾은선 그래프?
 }
 
-const setMovieNameList = (data) => {
+const setMovieNameList = (movieNameList) => {
   const navArea = d3.select("body > div#wrap > div#nav");
-  const movieNameList = Array.from(new Set(data.map(boxOffice => boxOffice.movieName)));
   navArea.selectAll("p").data(movieNameList).enter().append("p").append("a").text((movieName) => movieName);
 }
 
 const setBoxOfficeChart = (data) => {
   const chartArea = d3.select("body > div#wrap > div#chart");
+  chartArea.selectChildren().remove();
+  const chartDataMap = {
+    "audienceAccumulateList" : data.map(boxOffice => boxOffice.audienceAccumulate),
+    "salesAccumulateList" : data.map(boxOffice => boxOffice.salesAccumulate),
+    "screenCountList" : data.map(boxOffice => boxOffice.screenCount),
+    "showCountList" : data.map(boxOffice => boxOffice.showCount),
+  }
+
+  Object.keys(chartDataMap).forEach(key => {
+    const dataList = chartDataMap[key];
+    chartArea.append("svg")
+    .selectAll("rect")
+    .data(dataList)
+    .enter()
+    .append("rect")
+    .attr("class", "bar")
+    .attr("height", (d, i) => {
+      return d;
+    })
+    .attr("width", 15)
+    .attr("x", (d, i) => {
+      return i * 25;
+    })
+    .attr("y", (d, i) => {
+      return 0;
+    })
+  })
 }

@@ -1,11 +1,10 @@
 #header {}
 
 #wrap {
-  height: auto;
+  display: flex;
 }
 #wrap #nav {
-  width: 500px;
-  border-right: 1px solid black;
+  flex: 20%;
 }
 #wrap #nav p {
   cursor: pointer;
@@ -13,7 +12,15 @@
   padding: 10px 0 10px;
 }
 #wrap #chart {
-  width: auto;
+  flex: 80%;
+}
+#wrap #chart svg {
+  width: 49%;
+  height: 50%;
+  border: 1px solid;
+}
+#wrap #chart rect {
+  fill: steelblue;
 }
 #footer {
   text-align: right;

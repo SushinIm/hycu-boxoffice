@@ -4,6 +4,7 @@ import static org.jooq.impl.DSL.avg;
 import static org.jooq.impl.DSL.field;
 import static org.jooq.impl.DSL.max;
 import static org.jooq.impl.DSL.min;
+import static org.jooq.impl.DSL.sum;
 
 import com.hycu.boxoffice.domain.entity.BoxOfficeApiEntity;
 import com.hycu.boxoffice.domain.entity.BoxOfficeApiResponseEntity;
@@ -67,8 +68,8 @@ public class BoxOfficeRepository implements IBoxOfficeReadRepository, IBoxOffice
                         avg(boxOffice.AUDIENCE_INTENSITY).as("audience_intensity"),
                         avg(boxOffice.AUDIENCE_CHANGE).as("audience_change"),
                         max(boxOffice.AUDIENCE_ACCUMULATE).as("audience_accumulate"),
-                        avg(boxOffice.SCREEN_COUNT).as("screen_count"),
-                        avg(boxOffice.SHOW_COUNT).as("show_count"),
+                        sum(boxOffice.SCREEN_COUNT).as("screen_count"),
+                        sum(boxOffice.SHOW_COUNT).as("show_count"),
                         min(boxOffice.OPENED_AT).as("opened_at"))
                 .from(boxOffice)
                 .where(boxOffice.SAVED_AT.between(request.getStartDate(), request.getEndDate()))
