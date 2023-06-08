@@ -3,49 +3,43 @@ const digit2 = (target) => {
 }
 
 const setMovieChart = (boxOffice) => {
-  const chartArea = d3.select("body > div#wrap > div#chart");
-  chartArea.select("*").remove();
-  const movieData = boxOffice.filter(movie => boxOffice.movieName === movie.movieName);
-  console.log(movieData);
-  //TODO 순위
-  //TODO 매출
-  //TODO 관객
-  //TODO 상영
-  //TODO 날짜별로 꺾은선 그래프?
+  const chartArea = document.querySelector("div#chart");
+  chartArea.replaceChildren();
 }
 
 const setMovieNameList = (movieNameList) => {
-  const navArea = d3.select("body > div#wrap > div#nav");
-  navArea.selectAll("p").data(movieNameList).enter().append("p").append("a").text((movieName) => movieName);
+  const navArea = document.querySelector("div#nav");
+  navArea.replaceChildren();
+  movieNameList.map(movieName => {
+    let tagP = document.createElement("p");
+    let tagA = document.createElement("a");
+    tagA.textContent = movieName;
+    tagP.appendChild(tagA);
+    navArea.appendChild(tagP);
+  });
 }
 
-const setBoxOfficeChart = (data) => {
-  const chartArea = d3.select("body > div#wrap > div#chart");
-  chartArea.selectChildren().remove();
-  const chartDataMap = {
-    "audienceAccumulateList" : data.map(boxOffice => boxOffice.audienceAccumulate),
-    "salesAccumulateList" : data.map(boxOffice => boxOffice.salesAccumulate),
-    "screenCountList" : data.map(boxOffice => boxOffice.screenCount),
-    "showCountList" : data.map(boxOffice => boxOffice.showCount),
-  }
+const setBoxOfficeChart = (movieData) => {
+  document.querySelector("div#chart").replaceChildren();
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(() => {
+    let startDate = document.querySelector("#startDate").value;
+    let endDate = document.querySelector("#endDate").value;
+    let dataTable = [['영화 제목', '누적 매출액', '누적 관객수', '상영 횟수', '상영관 수']];
+    movieData.forEach(data => dataTable.push([data.movieName,
+      data.salesAccumulate,
+      data.audienceAccumulate,
+      data.showCount,
+      data.screenCount]));
 
-  Object.keys(chartDataMap).forEach(key => {
-    const dataList = chartDataMap[key];
-    chartArea.append("svg")
-    .selectAll("rect")
-    .data(dataList)
-    .enter()
-    .append("rect")
-    .attr("class", "bar")
-    .attr("height", (d, i) => {
-      return d;
-    })
-    .attr("width", 15)
-    .attr("x", (d, i) => {
-      return i * 25;
-    })
-    .attr("y", (d, i) => {
-      return 0;
-    })
-  })
+    let chartData = google.visualization.arrayToDataTable(dataTable);
+    let options = {
+      title: `${startDate} ~ ${endDate} 박스오피스 조회 정보`,
+      hAxis: {title: '누적 매출액'},
+      vAxis: {title: '누적 관객수'},
+      bubble: {textStyle: {fontSize: 11}}
+    };
+    let chart = new google.visualization.BubbleChart(document.getElementById('chart'));
+    chart.draw(chartData, options);
+  });
 }

@@ -14,14 +14,6 @@
 #wrap #chart {
   flex: 80%;
 }
-#wrap #chart svg {
-  width: 49%;
-  height: 50%;
-  border: 1px solid;
-}
-#wrap #chart rect {
-  fill: steelblue;
-}
 #footer {
   text-align: right;
 }

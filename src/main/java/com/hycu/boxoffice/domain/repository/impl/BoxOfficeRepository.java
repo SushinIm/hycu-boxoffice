@@ -1,7 +1,6 @@
 package com.hycu.boxoffice.domain.repository.impl;
 
 import static org.jooq.impl.DSL.field;
-import static org.jooq.impl.DSL.max;
 import static org.jooq.impl.DSL.min;
 import static org.jooq.impl.DSL.sum;
 
@@ -58,8 +57,8 @@ public class BoxOfficeRepository implements IBoxOfficeReadRepository, IBoxOffice
         Assert.notNull(request.getEndDate(), "종료 기준일 누락");
         return dslContext.select(boxOffice.MOVIE_CODE,
                         boxOffice.MOVIE_NAME,
-                        max(boxOffice.SALES_ACCUMULATE).as("sales_accumulate"),
-                        max(boxOffice.AUDIENCE_ACCUMULATE).as("audience_accumulate"),
+                        sum(boxOffice.SALES_AMOUNT).as("sales_accumulate"),
+                        sum(boxOffice.AUDIENCE_COUNT).as("audience_accumulate"),
                         sum(boxOffice.SCREEN_COUNT).as("screen_count"),
                         sum(boxOffice.SHOW_COUNT).as("show_count"),
                         min(boxOffice.OPENED_AT).as("opened_at"))
