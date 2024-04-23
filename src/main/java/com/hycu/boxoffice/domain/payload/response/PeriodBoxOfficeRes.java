@@ -1,4 +1,4 @@
-package com.hycu.boxoffice.presenter.payload.response;
+package com.hycu.boxoffice.domain.payload.response;
 
 import java.time.LocalDate;
 import lombok.Builder;

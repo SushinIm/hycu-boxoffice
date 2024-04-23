@@ -1,4 +1,4 @@
-package com.hycu.boxoffice.domain.repository;
+package com.hycu.boxoffice.repository;
 
 import com.hycu.boxoffice.domain.entity.BoxOfficeEntity;
 import java.util.List;
