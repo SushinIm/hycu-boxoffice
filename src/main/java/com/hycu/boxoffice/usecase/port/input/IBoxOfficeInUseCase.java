@@ -1,7 +1,7 @@
 package com.hycu.boxoffice.usecase.port.input;
 
-import com.hycu.boxoffice.domain.payload.request.BoxOfficeReq;
-import com.hycu.boxoffice.domain.model.PeriodBoxOfficeModel;
+import com.hycu.boxoffice.presenter.payload.request.BoxOfficeReq;
+import com.hycu.boxoffice.usecase.model.PeriodBoxOfficeModel;
 import java.util.List;
 
 public interface IBoxOfficeInUseCase {

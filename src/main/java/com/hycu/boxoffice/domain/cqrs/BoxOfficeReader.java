@@ -1,10 +1,10 @@
-package com.hycu.boxoffice.repository.cqrs;
+package com.hycu.boxoffice.domain.cqrs;
 
 import com.hycu.boxoffice.domain.mapper.IBoxOfficeMapper;
-import com.hycu.boxoffice.repository.IBoxOfficeReadRepository;
-import com.hycu.boxoffice.domain.payload.request.BoxOfficeReq;
-import com.hycu.boxoffice.domain.model.BoxOfficeModel;
-import com.hycu.boxoffice.domain.model.PeriodBoxOfficeModel;
+import com.hycu.boxoffice.domain.repository.IBoxOfficeReadRepository;
+import com.hycu.boxoffice.presenter.payload.request.BoxOfficeReq;
+import com.hycu.boxoffice.usecase.model.BoxOfficeModel;
+import com.hycu.boxoffice.usecase.model.PeriodBoxOfficeModel;
 import com.hycu.boxoffice.usecase.port.output.IBoxOfficeReadOutUseCase;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.hycu.boxoffice.repository;
+package com.hycu.boxoffice.domain.repository.impl;
 
 import static org.jooq.impl.DSL.field;
 import static org.jooq.impl.DSL.min;
@@ -8,7 +8,9 @@ import com.hycu.boxoffice.domain.entity.BoxOfficeApiEntity;
 import com.hycu.boxoffice.domain.entity.BoxOfficeApiResponseEntity;
 import com.hycu.boxoffice.domain.entity.BoxOfficeEntity;
 import com.hycu.boxoffice.domain.entity.PeriodBoxOfficeEntity;
-import com.hycu.boxoffice.domain.payload.request.BoxOfficeReq;
+import com.hycu.boxoffice.domain.repository.IBoxOfficeReadRepository;
+import com.hycu.boxoffice.domain.repository.IBoxOfficeWriteRepository;
+import com.hycu.boxoffice.presenter.payload.request.BoxOfficeReq;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;

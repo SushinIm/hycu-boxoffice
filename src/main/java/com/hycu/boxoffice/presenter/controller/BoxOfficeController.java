@@ -1,8 +1,8 @@
 package com.hycu.boxoffice.presenter.controller;
 
-import com.hycu.boxoffice.domain.mapper.IBoxOfficeModelMapper;
-import com.hycu.boxoffice.domain.payload.request.BoxOfficeReq;
-import com.hycu.boxoffice.domain.payload.response.PeriodBoxOfficeRes;
+import com.hycu.boxoffice.presenter.mapper.IBoxOfficeModelMapper;
+import com.hycu.boxoffice.presenter.payload.request.BoxOfficeReq;
+import com.hycu.boxoffice.presenter.payload.response.PeriodBoxOfficeRes;
 import com.hycu.boxoffice.usecase.port.input.IBoxOfficeInUseCase;
 import com.hycu.common.payload.CommonList;
 import com.hycu.common.payload.CommonResponse;
