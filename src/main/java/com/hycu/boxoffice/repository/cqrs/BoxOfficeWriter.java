@@ -1,8 +1,8 @@
-package com.hycu.boxoffice.domain.cqrs;
+package com.hycu.boxoffice.repository.cqrs;
 
 import com.hycu.boxoffice.domain.mapper.IBoxOfficeMapper;
-import com.hycu.boxoffice.domain.repository.IBoxOfficeWriteRepository;
-import com.hycu.boxoffice.usecase.model.BoxOfficeModel;
+import com.hycu.boxoffice.repository.IBoxOfficeWriteRepository;
+import com.hycu.boxoffice.domain.model.BoxOfficeModel;
 import com.hycu.boxoffice.usecase.port.output.IBoxOfficeWriteOutUseCase;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

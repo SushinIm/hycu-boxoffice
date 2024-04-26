@@ -1,4 +1,4 @@
-package com.hycu.boxoffice.usecase.model;
+package com.hycu.boxoffice.domain.model;
 
 import java.time.LocalDate;
 import lombok.Builder;

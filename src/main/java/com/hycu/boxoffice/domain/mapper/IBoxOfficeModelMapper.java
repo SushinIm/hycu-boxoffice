@@ -1,9 +1,9 @@
-package com.hycu.boxoffice.presenter.mapper;
+package com.hycu.boxoffice.domain.mapper;
 
-import com.hycu.boxoffice.presenter.payload.response.BoxOfficeRes;
-import com.hycu.boxoffice.presenter.payload.response.PeriodBoxOfficeRes;
-import com.hycu.boxoffice.usecase.model.BoxOfficeModel;
-import com.hycu.boxoffice.usecase.model.PeriodBoxOfficeModel;
+import com.hycu.boxoffice.domain.payload.response.BoxOfficeRes;
+import com.hycu.boxoffice.domain.payload.response.PeriodBoxOfficeRes;
+import com.hycu.boxoffice.domain.model.BoxOfficeModel;
+import com.hycu.boxoffice.domain.model.PeriodBoxOfficeModel;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants.ComponentModel;
